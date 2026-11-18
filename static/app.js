@@ -16,7 +16,7 @@ let instructors = read('teacherpick-proto-v4:instructors', []), comments = read(
 function saveSessionUser(){sessionWrite('teacherpick-proto-v4:user',user)}
 function persist(){write('teacherpick-proto-v4:accounts',people);write('teacherpick-proto-v4:instructors',instructors);write('teacherpick-proto-v4:programs',programs);write('teacherpick-proto-v4:comments',comments);write('teacherpick-proto-v4:reviews',reviews);write('teacherpick-proto-v4:messages',conversations)}
 function route(){return decodeURIComponent(location.hash.replace(/^#\/?/, '').split('?')[0]) || (admin?'admin-accounts':'home')}
-function go(page){location.hash=`/${page}`}
+function go(page){const next=`#/${page}`;if(location.hash===next){render();return}location.hash=next;render()}
 function postComments(){return comments[selectedPost]||(comments[selectedPost]=[])}
 function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2500)}
 function confirm(title,body,label,action){$('confirm-title').textContent=title;$('confirm-copy').textContent=body;$('confirm-yes').textContent=label;confirmAction=action;$('confirm-modal').showModal()}
