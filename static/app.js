@@ -82,7 +82,7 @@ function render(){
   if(admin){$('app').innerHTML=adminPage(page);bind();return}
   if(user&&['program','programs'].includes(page)&&user.role!=='instructor'){toast('프로그램 관리는 강사 계정에서 이용할 수 있습니다.');go('home');return}
   if(!user&&!publicRoutes.includes(page)){go('login');return}
-  const [kind,title,desc]=pageMap[page],content={home:homePage,search:searchPage,community:communityPage,messages:messagesPage,program:programPage,programs:programsPage,reviews:reviewsPage,account:accountPage,password:passwordPage}[page]();
+  const [kind,title,desc]=pageMap[page],content={home:homePage,search:searchPage,community:communityPage,messages:messagesPage,program:programPage,programs:programsPage,reviews:reviewsPage,account:accountPage}[page]();
   $('app').innerHTML=userShell(kind,content,title,desc);bind()
   }catch(error){console.error('Page render failed',error);const root=$('app');if(root)root.innerHTML=`<main class="page-shell"><section class="empty-state"><h1>화면을 불러오지 못했습니다</h1><p>페이지를 새로고침한 뒤 다시 시도해 주세요.</p><button class="primary-button" onclick="location.reload()">새로고침</button></section></main>`}
 }
