@@ -22,3 +22,5 @@
 .auth-card,.auth-form,.auth-form .field-label{min-width:0}
 .auth-form .field-label input,.auth-form .verify-row input{width:100%;min-width:0;max-width:100%;box-sizing:border-box}
 .auth-form .field-label input::placeholder,.auth-form .verify-row input::placeholder{white-space:nowrap}
+.form-error{min-height:0;margin:0;color:#c74f45;font-size:12px;line-height:1.5}
+.form-error:not(:empty){padding:10px 12px;border-radius:8px;background:#fff3f1}
