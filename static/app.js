@@ -13,8 +13,10 @@ let selectedPost = 0, selectedInstructor = 0, selectedConversation = 0, currentP
 let editingProgram = null, editingReview = null, reviewSort='latest';
 let user = sessionRead('teacherpick-proto-v4:user', null), admin = sessionStorage.getItem('teacherpick-proto-v4:admin') === 'true';
 let instructors = readList('teacherpick-proto-v4:instructors'), comments = read('teacherpick-proto-v4:comments', {});
+let auditLogs = readList('teacherpick-proto-v4:audit-logs');
 
 function saveSessionUser(){sessionWrite('teacherpick-proto-v4:user',user)}
+function recordLog(text){auditLogs.unshift({text,at:new Date().toLocaleString('ko-KR')});auditLogs=auditLogs.slice(0,100);write('teacherpick-proto-v4:audit-logs',auditLogs)}
 function persist(){write('teacherpick-proto-v4:accounts',people);write('teacherpick-proto-v4:instructors',instructors);write('teacherpick-proto-v4:programs',programs);write('teacherpick-proto-v4:comments',comments);write('teacherpick-proto-v4:reviews',reviews);write('teacherpick-proto-v4:messages',conversations)}
 function route(){return decodeURIComponent(location.hash.replace(/^#\/?/, '').split('?')[0]) || (admin?'admin-accounts':'home')}
 function go(page){const next=`#/${page}`;if(location.hash===next){render();return}location.hash=next;render()}
